@@ -1,0 +1,28 @@
+{
+  "chain_id": "betanet-1",
+  "default_fee": {
+    "amount": "0",
+    "gas": 300000
+  },
+  "default_memo": "msg",
+  "chain_url": "https://vc9pgivdjj7awqshhxlxutksvkrh2iq.trustory.io",
+  "base_url": "https://vc9pgivdjj7awqshhxlxutksvkrh2iq.trustory.io",
+  "website_url" : "https://www.trustory.io",
+  "s3_bucket_url": "https://s3-us-west-1.amazonaws.com/trustory/images/",
+  "waitlist_url": "https://jointrustory.typeform.com/to/Y1Body",
+  "terms_url": "https://www.trustory.io/terms/",
+  "slack_url": "https://join.slack.com/t/mytrustory/shared_invite/enQtNzkwNDMzNzI3NzE5LTYwZjI5Yjk0MTQ3YTY4Mzg3MzFhNWJlZTQ0MWZmN2YzNDM2OTRjNDFkOGFhMTdiMjZlYzRjYzc2ODVmMTFkZTE",
+  "ios_url": "https://apps.apple.com/us/app/trustory-debate-network/id1477670109?ls=1",
+  "android_url": "https://play.google.com/store/apps/details?id=com.trustory",
+  "share_route_urls": {
+    "claim": "/claim/",
+    "argument": "/argument/",
+    "comment": "/comment/"
+  },
+  "invite_route_url" : "/login/", 
+  "api": {
+    "endpoint": "/api/v1"
+  },
+  "app_name": "TruStory Beta",
+  "mixpanel": "033832ef11f4ca7a52ca49ec81d40b4f"
+}

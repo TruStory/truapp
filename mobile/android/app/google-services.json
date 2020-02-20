@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "965397153211",
+    "firebase_url": "https://trustory-app.firebaseio.com",
+    "project_id": "trustory-app",
+    "storage_bucket": "trustory-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965397153211:android:88d3c90c9a876a6c3f709e",
+        "android_client_info": {
+          "package_name": "com.trustory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965397153211-3crqak3ttebk7m22nqug3qk93svu580t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA809QzkOYFIlcj7QZ_Q5myp80Evv6mTsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965397153211-3crqak3ttebk7m22nqug3qk93svu580t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965397153211:android:655f1bed247b67553f709e",
+        "android_client_info": {
+          "package_name": "com.trustory.devnet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965397153211-3crqak3ttebk7m22nqug3qk93svu580t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA809QzkOYFIlcj7QZ_Q5myp80Evv6mTsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965397153211-3crqak3ttebk7m22nqug3qk93svu580t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

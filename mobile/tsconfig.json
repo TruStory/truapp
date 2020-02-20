@@ -1,0 +1,27 @@
+
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "react",
+    "noEmit": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "mobile/*": ["../mobile/*"],
+      "shared/*": ["../shared/*"],
+      "react-native-vector-icons/*": ["node_modules/react-native-vector-icons"]
+    }
+  },
+  "exclude": [ "../web" ],
+}

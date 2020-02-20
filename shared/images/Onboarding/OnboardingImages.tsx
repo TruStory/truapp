@@ -1,0 +1,1 @@
+export const slide_1 = require('shared/images/Onboarding/Slide1.png');

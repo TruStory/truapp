@@ -1,0 +1,46 @@
+.slick-dots li {
+  margin: 0px;
+}
+
+
+.slick-dots {
+  bottom: 15px;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #7350FF;
+  opacity: 1;
+}
+
+.slick-dots li button:before {
+  font-size: 10px;
+}
+
+
+.modal-container {
+  width: 720px;
+  max-width: 720px !important;
+}
+
+@media screen and (max-width: 769px) {
+  .modal-container {
+    width: 506px;
+    max-width: 506px !important;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .modal-container {
+    width: 320px;
+    max-width: 320px !important;
+  }
+}
+
+/* 
+.slick-slide {
+  height: 515px;
+} */
+
+.slick-slider iframe {
+  border: 1px solid black;
+}

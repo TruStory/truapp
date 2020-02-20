@@ -1,0 +1,9 @@
+export const best_purple = require('shared/images/Filters/BestPurple.png');
+export const best_gray = require('shared/images/Filters/BestGrey.png');
+export const best_black = require('shared/images/Filters/BestBlack.png');
+export const newest_purple = require('shared/images/Filters/NewestPurple.png');
+export const newest_gray = require('shared/images/Filters/NewestGrey.png');
+export const newest_black = require('shared/images/Filters/NewestBlack.png');
+export const trending_purple = require('shared/images/Filters/TrendingPurple.png');
+export const trending_gray = require('shared/images/Filters/TrendingGrey.png');
+export const trending_black = require('shared/images/Filters/TrendingBlack.png');

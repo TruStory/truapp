@@ -1,0 +1,302 @@
+
+@font-face {
+	font-family: 'MaterialIcons';
+	src: local('MaterialIcons'), url(fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Feather';
+	src: local('Feather'), url(fonts/Feather.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'SimpleLineIcons';
+	src: local('SimpleLineIcons'), url(fonts/SimpleLineIcons.ttf) format('truetype');
+}
+
+
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-Italic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-Bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-BoldItalic.ttf) format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-Thin.ttf) format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'roboto';
+  src: local('roboto_regular'), url(fonts/Roboto-ThinItalic.ttf) format('truetype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'source_serif';
+  src: local('source_serif'), url(fonts/SourceSerifPro-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'source_serif';
+  src: local('source_serif'), url(fonts/SourceSerifPro-It.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'source_serif';
+  src: local('source_serif'), url(fonts/SourceSerifPro-Semibold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'source_serif';
+  src: local('source_serif'), url(fonts/SourceSerifPro-SemiboldIt.ttf) format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'lora_regular';
+  src: local('lora_regular'), url(fonts/Lora-Regular.ttf) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lora_regular';
+  src: local('lora_regular'), url(fonts/Lora-RegularItalic.ttf) format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'lora_regular';
+  src: local('lora_regular'), url(fonts/Lora-Bold.ttf) format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'lora_regular';
+  src: local('lora_regular'), url(fonts/Lora-BoldItalic.ttf) format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+
+body {
+  margin: 0 auto;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.preload {
+  animation-duration: 0s !important;
+  -webkit-animation-duration: 0s !important;
+  transition:background-color 0s, opacity 0s, color 0s, width 0s, height 0s, padding 0s, margin 0s !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+button {
+  border: none;
+}
+
+.tippy-tooltip {
+  padding: 0;
+  border-radius: 10px;
+}
+
+.switch-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.switch-wrapper > div {
+  position: absolute;
+  width: 100%;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+
+.base-button, .base-button span {
+  display: inline-block;
+  vertical-align: middle;
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  transition-duration: 0.15s;
+  transition-property: color, background-color;
+}
+
+.base-button:enabled:active{
+  background-color: black;
+  opacity: 0.3;
+}
+
+.base-button:disabled{
+  cursor: default !important;
+}
+
+.feed-claim-image:hover {
+  opacity: 0.8;
+}
+
+.markdown {
+  word-wrap: break-word;
+}
+
+.markdown img {
+  display: block;
+  /* max-height: 350px; */
+  max-width: 100%;
+}
+
+iframe {
+  border-width: 0;
+}
+
+
+.tru-comments .markdown p, .tru-comments .markdown a, .tru-comments .markdown li, .tru-comments .markdown pre, 
+.tru-video-comments .markdown p, .tru-video-comments .markdown a, .tru-video-comments .markdown li, .tru-video-comments .markdown pre,
+.tru-argument-comments .markdown p, .tru-argument-comments .markdown a, .tru-argument-comments .markdown li, .tru-argument-comments .markdown pre  {
+  font-family: 'roboto';
+  font-size: 16px;
+  line-height: 23px;
+  letter-spacing: 0;
+  color: black;
+}
+
+.tru-comments .markdown a, .tru-video-comments .markdown a, .tru-argument-comments .markdown a  {
+  color: #7350FF;
+}
+
+.tru-comments .markdown p, .tru-video-comments .markdown p, .tru-argument-comments .markdown p {
+  margin-block-start: 0em;
+  margin-block-end: 1em;
+}
+
+.notifications .markdown p {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+}
+
+.markdown p, .markdown a, .markdown li, .markdown pre {
+  font-family: 'lora_regular';
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0.2px;
+  color: black;
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+  color: black;
+}
+
+.markdown a {
+  color: #7350FF;
+  text-decoration: underline;
+  word-break: break-word;
+}
+
+::placeholder {
+  color: rgb(203, 203, 203);
+}
+
+.hvr-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.react-slidedown.add-argument, .react-slidedown.read-more {
+  transition-duration: 0.4s;
+  transition-delay: 0.1s;
+}
+
+body::-webkit-scrollbar, .modal-blanket::-webkit-scrollbar, .tru-comments div::-webkit-scrollbar, .tru-video-comments div::-webkit-scrollbar, .menu::-webkit-scrollbar { width: 0 !important }
+body, .modal-blanket, .tru-comments div, .menu,  .tru-video-comments div { 
+  overflow: -moz-scrollbars-none; 
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filled-button:hover{
+  opacity: 0.8;
+}
+
+/* on both sides */
+.line-both-sides span {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.line-both-sides span:before,
+.line-both-sides span:after {
+  content: '';
+  border-top: 0.5px solid #E4E1F0;
+  margin: 0 10px 0 0;
+  flex: 1 0 10px;
+}
+
+.line-both-sides span:after {
+  margin: 0 0 0 10px;
+}
+
+.highlight-share-popover {
+  z-index: 1000;
+}

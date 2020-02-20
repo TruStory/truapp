@@ -1,0 +1,1 @@
+export const logo_small = require('shared/images/Logo/SmallLogo.png');

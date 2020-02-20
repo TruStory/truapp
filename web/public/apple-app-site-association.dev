@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "76M8HL2R28.devnet.trustory.io",
+        "paths": [ "*" ]
+      }
+    ]
+  }
+}

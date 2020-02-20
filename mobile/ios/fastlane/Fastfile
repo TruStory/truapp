@@ -1,0 +1,77 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    match(
+      type: 'development', 
+      readonly: true,
+      app_identifier: ["app.trustory.io","devnet.trustory.io"]
+    )
+    match(
+      type: 'appstore', 
+      readonly: true,
+      app_identifier: ["app.trustory.io","devnet.trustory.io"]
+    )
+  end
+
+
+  desc "Push a new beta build to TestFlight"
+  lane :devnet do
+    app_identifier = (git_branch === "master" ? "app.trustory.io" : "devnet.trustory.io")
+    display_name = (git_branch === "master" ? "TruStory" : "TruDev")
+    update_app_identifier(
+      plist_path: "mobile/Info.plist",
+      app_identifier: app_identifier
+    )
+    update_info_plist(
+      plist_path: "mobile/Info.plist",
+      display_name: display_name 
+    )
+    certificates
+    version_number = get_version_number()
+    last_build_number = latest_testflight_build_number(
+      app_identifier: app_identifier,
+      version: version_number,
+    )
+    increment_build_number(build_number: last_build_number + 1)
+    gym(
+      scheme: "mobile",
+      workspace: "mobile.xcworkspace",
+      xcargs: "PROVISIONING_PROFILE_SPECIFIER='match AppStore #{app_identifier}' TWITTER_OAUTH_CALLBACK='twitterkit-#{ENV["TWITTER_KEY"]}' CODE_PUSH_KEY='#{ENV["CODE_PUSH_KEY_IOS"]}' APP_LINKS_URL='#{ENV["APP_LINKS_URL"]}'",
+    )
+    pilot(
+      changelog: "Bug fixes and application stability improvements",
+      groups: ["Trustory"],
+      distribute_external: true,
+    )
+  end
+
+
+  desc "Push a new beta build to TestFlight"
+  lane :production do
+    certificates
+    increment_build_number(xcodeproj: "mobile.xcodeproj")
+    build_app(workspace: "mobile.xcworkspace", scheme: "mobile")
+    upload_to_app_store
+  end
+end

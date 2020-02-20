@@ -1,0 +1,143 @@
+// config-overrides.js
+const {
+    addWebpackAlias,
+    babelInclude,
+    override,
+    disableEsLint,
+  } = require('customize-cra')
+  
+  const path = require('path')
+  
+  module.exports = override(
+    disableEsLint(),
+    addWebpackAlias({
+      'shared/images/Argument/ArgumentCountBlack.png' : 'shared/images/Argument/ArgumentCountBlack@3x.png',
+      'shared/images/Argument/ArgumentCountGray.png' : 'shared/images/Argument/ArgumentCountGray@3x.png',
+      'shared/images/Argument/ArgumentCountPurple.png' : 'shared/images/Argument/ArgumentCountPurple@3x.png',
+      'shared/images/Argument/EmptyArgument.png' : 'shared/images/Argument/EmptyArgument@3x.png',
+
+      'shared/images/Brand/Slack.png' : 'shared/images/Brand/Slack@3x.png',
+      'shared/images/Brand/AppleStore.png' : 'shared/images/Brand/AppleStore@3x.png',
+      'shared/images/Brand/GoogleStore.png' : 'shared/images/Brand/GoogleStore@3x.png',
+
+      'shared/images/ArgumentActions/AgreePurple.png' : 'shared/images/ArgumentActions/AgreePurple@3x.png',
+      'shared/images/ArgumentActions/AgreeWhite.png' : 'shared/images/ArgumentActions/AgreeWhite@3x.png',
+      'shared/images/ArgumentActions/NotHelpfulBrown.png' : 'shared/images/ArgumentActions/NotHelpfulBrown@3x.png',
+      'shared/images/ArgumentActions/NotHelpfulWhite.png' : 'shared/images/ArgumentActions/NotHelpfulWhite@3x.png',
+
+      'shared/images/Claim/AddClaimBlack.png' : 'shared/images/Claim/AddClaimBlack@3x.png',
+      'shared/images/Claim/AddClaimPurple.png' : 'shared/images/Claim/AddClaimPurple@3x.png',
+
+      'shared/images/Coins/CoinsBack.png' : 'shared/images/Coins/CoinsBack@3x.png',
+      'shared/images/Coins/CoinsBlack.png' : 'shared/images/Coins/CoinsBlack@3x.png',
+      'shared/images/Coins/CoinsChallenge.png' : 'shared/images/Coins/CoinsChallenge@3x.png',
+      'shared/images/Coins/CoinsGray.png' : 'shared/images/Coins/CoinsGray@3x.png',
+      'shared/images/Coins/CoinsPurple.png' : 'shared/images/Coins/CoinsPurple@3x.png',
+
+      'shared/images/Filters/BestGrey.png' : 'shared/images/Filters/BestGrey@3x.png',
+      'shared/images/Filters/BestPurple.png' : 'shared/images/Filters/BestPurple@3x.png',
+      'shared/images/Filters/NewestGrey.png' : 'shared/images/Filters/NewestGrey@3x.png',
+      'shared/images/Filters/NewestPurple.png' : 'shared/images/Filters/NewestPurple@3x.png',
+      'shared/images/Filters/TrendingGrey.png' : 'shared/images/Filters/TrendingGrey@3x.png',
+      'shared/images/Filters/TrendingPurple.png' : 'shared/images/Filters/TrendingPurple@3x.png',
+      
+      'shared/images/Flag/FlagBlack.png' : 'shared/images/Flag/FlagBlack@3x.png',
+      'shared/images/Flag/FlagPurple.png' : 'shared/images/Flag/FlagPurple@3x.png',
+      'shared/images/Flag/FlagRedFilled.png' : 'shared/images/Flag/FlagRedFilled@3x.png',
+      'shared/images/Flag/FlagRedOutline.png' : 'shared/images/Flag/FlagRedOutline@3x.png',
+
+      'shared/images/HowItWorks/Agree.png' : 'shared/images/HowItWorks/Agree@3x.png',
+      'shared/images/HowItWorks/Chat.png' : 'shared/images/HowItWorks/Chat@3x.png',
+      'shared/images/HowItWorks/HowItWorksClaim.png' : 'shared/images/HowItWorks/HowItWorksClaim@3x.png',
+      'shared/images/HowItWorks/HowItWorksReward.png' : 'shared/images/HowItWorks/HowItWorksReward@3x.png',
+      'shared/images/HowItWorks/HowItWorksTru.png' : 'shared/images/HowItWorks/HowItWorksTru@3x.png',
+      'shared/images/HowItWorks/NotHelpful.png' : 'shared/images/HowItWorks/NotHelpful@3x.png',
+      'shared/images/HowItWorks/Write.png' : 'shared/images/HowItWorks/Write@3x.png',
+
+      'shared/images/Invite/InviteFriend1.png' : 'shared/images/Invite/InviteFriend1@3x.png',
+      'shared/images/Invite/InviteFriend2.png' : 'shared/images/Invite/InviteFriend2@3x.png',
+      'shared/images/Invite/InviteFriend3.png' : 'shared/images/Invite/InviteFriend3@3x.png',
+
+      'shared/images/Logo/SmallLogo.png' : 'shared/images/Logo/SmallLogo@3x.png',
+
+      'shared/images/Modals/OutOfTruWeb.png' : 'shared/images/Modals/OutOfTruWeb@3x.png',
+      'shared/images/Modals/StakingLimitWeb.png' : 'shared/images/Modals/StakingLimitWeb@3x.png',
+
+      'shared/images/Pages/AddClaimBlack.png' : 'shared/images/Pages/AddClaimBlack@3x.png',
+      'shared/images/Pages/AddClaimPurple.png' : 'shared/images/Pages/AddClaimPurple@3x.png',
+      'shared/images/Pages/HomeBlack.png' : 'shared/images/Pages/HomeBlack@3x.png',
+      'shared/images/Pages/HomePurple.png' : 'shared/images/Pages/HomePurple@3x.png',
+      'shared/images/Pages/DiscoverBlack.png' : 'shared/images/Pages/DiscoverBlack@3x.png',
+      'shared/images/Pages/DiscoverPurple.png' : 'shared/images/Pages/DiscoverPurple@3x.png',
+      'shared/images/Pages/HowItWorksBlack.png' : 'shared/images/Pages/HowItWorksBlack@3x.png',
+      'shared/images/Pages/HowItWorksPurple.png' : 'shared/images/Pages/HowItWorksPurple@3x.png',
+      'shared/images/Pages/LeaderboardBlack.png' : 'shared/images/Pages/LeaderboardBlack@3x.png',
+      'shared/images/Pages/LeaderboardPurple.png' : 'shared/images/Pages/LeaderboardPurple@3x.png',
+      'shared/images/Pages/LogoutRed.png' : 'shared/images/Pages/LogoutRed@3x.png',
+      'shared/images/Pages/LogoutWhite.png' : 'shared/images/Pages/LogoutWhite@3x.png',
+      'shared/images/Pages/NotificationBlack.png' : 'shared/images/Pages/NotificationBlack@3x.png',
+      'shared/images/Pages/NotificationPurple.png' : 'shared/images/Pages/NotificationPurple@3x.png',
+      'shared/images/Pages/ProfileBlack.png' : 'shared/images/Pages/ProfileBlack@3x.png',
+      'shared/images/Pages/ProfilePurple.png' : 'shared/images/Pages/ProfilePurple@3x.png',
+      'shared/images/Pages/ValueBlack.png' : 'shared/images/Pages/ValueBlack@3x.png',
+      'shared/images/Pages/ValuePurple.png' : 'shared/images/Pages/ValuePurple@3x.png',
+      'shared/images/Pages/WalletBlack.png' : 'shared/images/Pages/WalletBlack@3x.png',
+      'shared/images/Pages/WalletPurple.png' : 'shared/images/Pages/WalletPurple@3x.png',
+
+      'shared/images/Share/Share.png' : 'shared/images/Share/Share@3x.png',
+      'shared/images/Share/SharePurple.png' : 'shared/images/Share/SharePurple@3x.png',
+
+
+
+      'shared/components/Modals/FlagConfirmationModal': 'web/src/components/Modals/FlagConfirmationModal',
+      'shared/components/Modals/AgreeConfirmationModal': 'web/src/components/Modals/AgreeConfirmationModal',
+      'shared/components/Modals/StakeConfirmationModal': 'web/src/components/Modals/StakeConfirmationModal',
+      'shared/components/Slashing/SlashArgumentOptions': 'web/src/components/Slashing/SlashArgumentOptions',
+      'shared/components/AppAccount/AppAccountClaimsCreatedList': 'web/src/components/AppAccount/AppAccountClaimsCreatedList',
+      'shared/components/AppAccount/AppAccountClaimArgumentsList': 'web/src/components/AppAccount/AppAccountClaimArgumentsList',
+      'shared/components/AppAccount/OpenProfile': 'web/src/components/AppAccount/OpenProfile',
+      'shared/components/AppAccount/AppAccountLink': 'web/src/components/AppAccount/AppAccountLink',
+      'shared/components/WebOnly/TruTip': 'web/src/components/Popovers/TruTip',
+      'shared/components/Toast/TruToast': 'web/src/components/Toast/TruToast',
+      'shared/components/Comments/CommentMenu': 'web/src/components/Comments/CommentMenu',
+      'shared/components/Argument/ArgumentItem': 'web/src/components/Argument/ArgumentItem',
+      'shared/components/Argument/ArgumentList': 'web/src/components/Argument/ArgumentList',
+      'shared/components/Argument/ArgumentActions': 'web/src/components/Argument/ArgumentActions',
+      'shared/components/Argument/AppAccountArgumentItem': 'web/src/components/Argument/AppAccountArgumentItem',
+      'shared/components/Argument/TopArgumentItem': 'web/src/components/Argument/TopArgumentItem',
+      'shared/components/Argument/ArgumentSummaryText': 'web/src/components/Argument/ArgumentSummaryText',
+      'shared/components/Argument/ArgumentMenu': 'web/src/components/Argument/ArgumentMenu',
+      'shared/components/Argument/ArgumentDetails': 'web/src/components/Argument/ArgumentDetails',
+      'shared/components/Argument/ScrollTo': 'web/src/components/Argument/ScrollTo',
+      'shared/components/Communities/CommunityCoinList': 'web/src/components/Communities/CommunityCoinList',
+      'shared/components/Communities/CommunityHeroImage': 'web/src/components/Communities/CommunityHeroImage',
+      'shared/components/Leaderboard/LeaderboardDateFilterComponent': 'web/src/components/Leaderboard/LeaderboardDateFilterComponent',
+      'shared/components/Leaderboard/LeaderboardMetricFilterComponent': 'web/src/components/Leaderboard/LeaderboardMetricFilterComponent',
+      'shared/components/Wallet/ChartDateFilterComponent': 'web/src/components/Wallet/ChartDateFilterComponent',
+      'shared/components/Wallet/TransactionsList': 'web/src/components/Wallet/TransactionsList',
+      'shared/components/Wallet/CommunityEarningItem': 'web/src/components/Wallet/CommunityEarningItem',
+      'shared/components/Wallet/CommunityEarningsList': 'web/src/components/Wallet/CommunityEarningsList',
+      'shared/components/Claim/ClaimOfTheDay': 'web/src/components/Claim/ClaimOfTheDay',
+      'shared/components/Claim/ClaimImage': 'web/src/components/Claim/ClaimImage',
+      'shared/components/Claim/ClaimItem': 'web/src/components/Claim/ClaimItem',
+      'shared/components/Claim/ClaimText': 'web/src/components/Claim/ClaimText',
+      'shared/components/Claim/ClaimSource': 'web/src/components/Claim/ClaimSource',
+      'shared/components/Claim/FeedClaimItem': 'web/src/components/Claim/FeedClaimItem',
+      'shared/components/Claim/FeedClaimImage': 'web/src/components/Claim/FeedClaimImage',
+      'shared/components/Claim/FeedClaimText': 'web/src/components/Claim/FeedClaimText',
+      'shared/components/Base/BaseButton': 'web/src/components/Base/BaseButton',
+      'shared/components/Base/BaseActionable': 'web/src/components/Base/BaseActionable',
+      'shared/components/Base/BaseText': 'web/src/components/Base/BaseText',
+      'shared/components/Base/BaseLoadingIndicator': 'web/src/components/Base/BaseLoadingIndicator',
+      'shared/components/WebOnly/BaseATag': 'web/src/components/Base/BaseATag',
+      'shared/utils/base64': 'web/src/utils/base64',
+      'react-native-vector-icons': 'react-native-vector-icons/dist',
+      'react-native': 'react-native-web',
+      'react-native-mixpanel': 'web/src/utils/MixPanel',
+    }),
+    babelInclude([
+      path.resolve('src'),
+      path.resolve('../shared')
+    ]),
+  )
+  

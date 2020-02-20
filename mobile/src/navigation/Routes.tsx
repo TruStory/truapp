@@ -1,0 +1,60 @@
+export const Routes = {
+  App: 'App',
+  AppAccount: 'AppAccount',
+  UserAppAccount: 'UserAppAccount',
+  Main: 'Main',
+  Tabs: 'Tabs',
+  Auth: 'Auth',
+
+  FeedTab: 'FeedTab',
+  NotificationsTab: 'NotificationsTab',
+  AppAccountTab: 'AppAccountTab',
+  WalletTab: 'WalletTab',
+
+  Feed: 'Feed',
+  FeedStack: 'FeedStack',
+  Claim: 'Claim',
+  ClaimStack: 'ClaimStack',
+  Comment: 'Comment',
+  CommentStack: 'CommentStack',
+  ArgumentComment: 'ArgumentComment',
+  ArgumentCommentStack: 'ArgumentCommentStack',
+  AddQuestionStack: 'AddQuestionStack',
+  AddQuestion: 'AddQuestion',
+  Preview: 'Preview',
+  Argument: 'Argument',
+  ArgumentStack: 'ArgumentStack',
+  AddArgumentStack: 'AddArgument',
+  AddArgumentScreen1: 'AddArgumentScreen1',
+  AddArgumentScreen2: 'AddArgumentScreen2',
+  AddArgumentScreen3: 'AddArgumentScreen3',
+  AddClaim: 'AddClaim',
+  AddClaimScreen1: 'AddClaimScreen1',
+  AddClaimScreen2: 'AddClaimScreen2',
+  AddClaimScreen3: 'AddClaimScreen3',
+  AddClaimScreen4: 'AddClaimScreen4',
+  Notifications: 'Notifications',
+  Wallet: 'Wallet',
+
+  OnboardingStack: 'OnboardingStack',
+
+  Leaderboard: 'Leaderboard',
+
+  Search: 'Search',
+  HowItWorks: 'HowItWorks',
+
+  InviteStack: 'InviteStack',
+  Invite: 'Invite',
+  InviteDetails: 'InviteDetails',
+
+  Settings: 'Settings',
+  SelectCommunities: 'SelectCommunities',
+
+  Login: 'Login',
+  Register: 'Register',
+  Verify: 'Verify',
+  AccountRecovery: 'AccountRecovery',
+  AccountRecoverySent: 'AccountRecoverySent',
+  ProcessVerification: 'ProcessVerification',
+
+};

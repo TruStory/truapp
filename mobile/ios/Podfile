@@ -1,0 +1,47 @@
+platform :ios, '9.0'
+
+target 'mobile' do
+  rn_path = '../node_modules/react-native'
+
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+  ]
+  pod 'TwitterKit', '3.1.1'
+  pod 'TwitterCore', '3.0.1'
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~>  3.14'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
+  pod 'Folly', :podspec => "#{rn_path}/third-party-podspecs/Folly.podspec"
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+  pod 'Mixpanel'
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
+  post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == "React"
+        target.remove_from_project
+      end
+
+      targets_to_ignore = %w(React yoga)
+      
+      if targets_to_ignore.include? target.name
+        target.remove_from_project
+      end
+    end
+  end
+end

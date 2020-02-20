@@ -1,0 +1,20 @@
+
+export enum CodeType {
+  CodeOK = 0,
+  CodeInternal = 1,
+  CodeTxDecode = 2,
+  CodeInvalidSequence = 3,
+  CodeUnauthorized = 4,
+  CodeInsufficientFunds = 5,
+  CodeUnknownRequest = 6,
+  CodeInvalidAddress = 7,
+  CodeInvalidPubKey = 8,
+  CodeUnknownAddress = 9,
+  CodeInsufficientCoins = 10,
+  CodeInvalidCoins = 11,
+  CodeOutOfGas = 12,
+  CodeMemoTooLarge = 13,
+  CodeInsufficientFee = 14,
+  CodeMaxAmountStakingReached = 509,
+  CodeMinBalance = 516,
+}

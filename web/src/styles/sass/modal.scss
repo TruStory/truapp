@@ -1,0 +1,10 @@
+.modal-container {
+    margin: 0 auto;
+    max-height: calc(100vh - 40px);
+    width: 100%;
+}
+@media screen and (min-width: 769px) {
+    .modal-container {
+        width: 640px;
+    }
+}

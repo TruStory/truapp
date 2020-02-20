@@ -1,0 +1,226 @@
+version: 2
+jobs:
+  deploy-web:
+    docker: 
+      - image: circleci/node
+    working_directory: ~/truapp
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "7a:fe:42:64:1d:e4:c0:1a:cc:aa:8c:5e:5e:e8:f8:03"
+      - checkout 
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+          
+      - run:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cp shared/app-config.prod.json shared/app-config.json
+              cp web/public/apple-app-site-association.prod web/public/apple-app-site-association
+            elif [ "${CIRCLE_BRANCH}" == "develop" ]
+            then
+              cp shared/app-config.dev.json shared/app-config.json
+              cp web/public/apple-app-site-association.dev web/public/apple-app-site-association
+            fi
+            
+      - run: 
+          command: yarn build
+          working_directory: ~/truapp/web
+
+      - run:
+          name: deploy
+          command: |
+            ssh-keyscan $AWS_EC2_HOST >> ~/.ssh/known_hosts
+            ssh $AWS_EC2_USER@$AWS_EC2_HOST "mkdir -p /home/ubuntu/website"
+            scp -r ~/truapp/web/build "$AWS_EC2_USER@$AWS_EC2_HOST:/home/ubuntu/website/$CIRCLE_SHA1"
+            ssh $AWS_EC2_USER@$AWS_EC2_HOST "ln -sfn /home/ubuntu/website/$CIRCLE_SHA1 /home/ubuntu/website/live"
+            echo "Website deployed"
+
+  testflight:
+    macos:
+      xcode: "11.0.0"
+    working_directory: ~/truapp
+    # use a --login shell so our "set Ruby version" command gets picked up for later steps
+    shell: /bin/bash --login -o pipefail 
+    steps:
+      - checkout
+      - run:
+          name: set Ruby version
+          command:  echo "ruby-2.6" > ~/.ruby-version
+      - run: 
+          command: yarn install
+      - run: 
+          command: yarn install
+          working_directory: ~/truapp/mobile
+
+      # install fastlane and cocoapods dependencies
+      - restore_cache:
+          key: bundle-v1-{{ checksum "mobile/ios/Gemfile.lock" }}-{{ arch }}
+      - run: 
+          command: bundle install --path vendor/bundle
+          working_directory: ~/truapp/mobile/ios
+      - save_cache:
+          key: bundle-v1-{{ checksum "mobile/ios/Gemfile.lock" }}-{{ arch }}
+          paths:
+            - mobile/ios/vendor/bundle
+      - restore_cache:
+          key: pod-v1-{{ checksum "mobile/ios/Podfile.lock" }}-{{ arch }}
+      - run: 
+          command: bundle exec pod install
+          working_directory: ~/truapp/mobile/ios
+      - save_cache:
+          key: pod-v1-{{ checksum "mobile/ios/Podfile.lock" }}-{{ arch }}
+          paths: ~/.cocoapod
+
+      - run:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cp shared/app-config.prod.json shared/app-config.json
+            else
+              cp shared/app-config.dev.json shared/app-config.json
+            fi
+            echo "{\"twitter\":{\"key\":\"$TWITTER_KEY\",\"secret\":\"$TWITTER_SECRET\",\"sha\":\"$CIRCLE_SHA1\"}}" > mobile/secret-config.json
+
+      - run: 
+          command: |
+            yarn add -D -W appcenter-cli
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              node_modules/.bin/appcenter codepush release-react -a engineering-trustory.io/app.trustory.io-ios -d Production --token $APPCENTER_API_TOKEN
+            else
+              node_modules/.bin/appcenter codepush release-react -a engineering-trustory.io/devnet.trustory.io-ios -d Production --token $APPCENTER_API_TOKEN
+            fi
+          working_directory: ~/truapp/mobile
+
+      - run: 
+          command: bundle exec fastlane devnet
+          working_directory: ~/truapp/mobile/ios
+
+  playstore:
+    working_directory: ~/app/mobile/android
+    docker:
+      - image: circleci/android:api-28-node
+    steps:
+      - checkout:
+          path: ~/app
+      - attach_workspace:
+          at: ~/app
+      - run: 
+          command: yarn install
+          working_directory: ~/app
+      - run: 
+          command: yarn install && yarn run jetify
+          working_directory: ~/app/mobile
+
+      - restore_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+      - run: bundle install --path vendor/bundle
+      - save_cache:
+          key: bundle-v1-{{ checksum "Gemfile.lock" }}-{{ arch }}
+          paths:
+            - mobile/android/vendor/bundle
+
+      - run:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cp shared/app-config.prod.json shared/app-config.json
+            else
+              cp shared/app-config.dev.json shared/app-config.json
+            fi
+            echo "{\"twitter\":{\"key\":\"$TWITTER_KEY\",\"secret\":\"$TWITTER_SECRET\",\"sha\":\"$CIRCLE_SHA1\"}}" > mobile/secret-config.json
+          working_directory: ~/app
+
+      - run:
+          name: Set Play store key
+          command: echo $PLAYSTORE_KEY > key.json
+
+      - run: 
+          command: |
+            echo "<resources><string moduleConfig=\"true\" name=\"reactNativeCodePush_androidDeploymentKey\">$CODE_PUSH_KEY_ANDROID</string></resources>" > android/app/src/main/res/values/strings.xml
+          working_directory: ~/app/mobile
+
+      - run: bundle exec fastlane beta
+
+      - run: 
+          command: |
+            yarn add -D -W appcenter-cli
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              node_modules/.bin/appcenter codepush release-react -a engineering-trustory.io/app.trustory.io-android -d Production --token $APPCENTER_API_TOKEN
+            else
+              node_modules/.bin/appcenter codepush release-react -a engineering-trustory.io/devnet.trustory.io-android -d Production --token $APPCENTER_API_TOKEN
+            fi
+          working_directory: ~/app/mobile
+
+workflows:
+  version: 2
+  devnet:
+    jobs:
+      - deploy-web:
+          context: web-devnet
+          filters:
+            branches:
+              only: 
+                - develop
+      - testflight:
+          context: mobile-devnet
+          filters:
+            branches:
+              only: 
+                - develop
+      - playstore:
+          context: mobile-devnet
+          filters:
+            branches:
+              only:
+                - develop
+  production:
+    jobs:
+      - deploy-web:
+          context: web-production
+          filters:
+            branches:
+              only: 
+                - master
+      - testflight:
+          context: mobile-production           
+          filters:
+            branches:
+              only: 
+                - master
+      - playstore:
+          context: mobile-production
+          filters:
+            branches:
+              only:
+                - master
+  manual:
+    jobs:
+      - manual-testflight:
+          type: approval
+          filters:
+            branches:
+              ignore: 
+                - master
+                - develop
+      - testflight:
+          context: mobile-devnet
+          requires: 
+            - manual-testflight
+      - manual-playstore:
+          type: approval
+          filters:
+            branches:
+              ignore: 
+                - master
+                - develop
+      - playstore:
+          context: mobile-devnet
+          requires: 
+            - manual-playstore
+

@@ -1,0 +1,45 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Submit a new Alpha Build to Play Store"
+  lane :beta do
+    track = "internal"
+    flavor = (git_branch === "master" ? "Production" : "Devnet")
+    package_name = (git_branch === "master" ? "com.trustory" : "com.trustory.devnet")
+    versions = google_play_track_version_codes(
+      package_name: package_name,
+      track: track
+    )
+    gradle(
+      task: "assemble#{flavor}Release",
+      print_command: false,
+      properties: {     
+        "android.injected.signing.store.file" => "keystore.jks",
+        "android.injected.signing.store.password" => ENV['ANDROID_STORE_PASSWORD'],     
+        "android.injected.signing.key.alias" => "trustory",
+        "android.injected.signing.key.password" => ENV['ANDROID_KEY_PASSWORD'], 
+        "versionCode" => "#{versions.length > 0 ? versions[0] + 1 : 1}",
+      }
+    )
+    upload_to_play_store(
+      track: track,
+      package_name: package_name
+    )
+  end
+end
